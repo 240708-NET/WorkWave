@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\API\\API.csproj": {}
+    "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/API/API.csproj": {}
   },
   "projects": {
-    "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\API\\API.csproj": {
+    "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\API\\API.csproj",
+        "projectUniqueName": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/API/API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\warlo\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\API\\obj\\",
+        "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/API/API.csproj",
+        "packagesPath": "/Users/kevanwilliams/.nuget/packages/",
+        "outputPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\warlo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/kevanwilliams/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,11 +26,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj": {
-                "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj"
+              "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj": {
+                "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj"
               },
-              "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\Services.csproj": {
-                "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\Services.csproj"
+              "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/Services.csproj": {
+                "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/Services.csproj"
               }
             }
           }
@@ -74,21 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\program files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj": {
+    "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj",
+        "projectUniqueName": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj",
         "projectName": "Models",
-        "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\warlo\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\obj\\",
+        "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj",
+        "packagesPath": "/Users/kevanwilliams/.nuget/packages/",
+        "outputPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\warlo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/kevanwilliams/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -132,21 +132,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\program files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\Repo.csproj": {
+    "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/Repo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\Repo.csproj",
+        "projectUniqueName": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/Repo.csproj",
         "projectName": "Repo",
-        "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\Repo.csproj",
-        "packagesPath": "C:\\Users\\warlo\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\obj\\",
+        "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/Repo.csproj",
+        "packagesPath": "/Users/kevanwilliams/.nuget/packages/",
+        "outputPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\warlo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/kevanwilliams/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -158,8 +158,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj": {
-                "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj"
+              "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj": {
+                "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj"
               }
             }
           }
@@ -200,21 +200,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\program files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\Services.csproj": {
+    "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\Services.csproj",
+        "projectUniqueName": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/Services.csproj",
         "projectName": "Services",
-        "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\warlo\\.nuget\\packages\\",
-        "outputPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Services\\obj\\",
+        "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/Services.csproj",
+        "packagesPath": "/Users/kevanwilliams/.nuget/packages/",
+        "outputPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Services/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\warlo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/kevanwilliams/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -226,11 +226,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj": {
-                "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Models\\Models.csproj"
+              "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj": {
+                "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Models/Models.csproj"
               },
-              "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\Repo.csproj": {
-                "projectPath": "D:\\Workspace\\revature\\WorkWave\\Application\\WorkWave\\Repo\\Repo.csproj"
+              "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/Repo.csproj": {
+                "projectPath": "/Volumes/Elements/Team6/WorkWave/Application/WorkWave/Repo/Repo.csproj"
               }
             }
           }
@@ -265,7 +265,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\program files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
