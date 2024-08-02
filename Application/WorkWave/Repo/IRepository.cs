@@ -3,13 +3,15 @@ namespace Repository{
 
     public interface IRepository<T>{
 
-        void save(T t);
+        void Save(T t);
 
-        void update(T t);
-        List<T> list();
-        void deleteById(int id);
+        void Update(T t);
 
-        T getById(int id);
+        List<T> List();
+
+        void Delete(T t);
+
+        T GetById(int Id);
         
     }
 }

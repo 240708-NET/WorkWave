@@ -4,7 +4,7 @@ using Models;
 namespace Repository
 {
 
-    public class UserRepository : IRepository
+    public class UserRepository : IRepository<User>
     {
         DataContext context;
         public UserRepository(string connectionstring){
