@@ -31,7 +31,7 @@ public class UserService
 
     public User GetById(int id)
     {
-        repository.GetById(id);
+        return repository.GetById(id);
     }
 
 }

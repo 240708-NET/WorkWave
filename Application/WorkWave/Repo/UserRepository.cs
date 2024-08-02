@@ -31,10 +31,10 @@ namespace Repository
 
         public void Update(User user){
 
-                User userToUpdate = context.Users.Find(user.Id);
+                User userToUpdate = context.Users.Find(user.ID);
 
                 if(user != null){
-                    userToUpdate.FullName = user.Description;
+                    userToUpdate.FullName = user.FullName;
                     userToUpdate.Email = user.Email;
                     userToUpdate.Password = user.Password;
                     context.SaveChanges();
