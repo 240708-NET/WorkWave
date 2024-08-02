@@ -8,6 +8,11 @@ public class UserService
 
     private UserRepository repository;
 
+    public UserService(UserRepository repository)
+    {
+        this.repository = repository;
+    }
+
     public List<User> GetAll()
     {
         return repository.List();
