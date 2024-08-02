@@ -32,3 +32,5 @@ C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Repo\obj\Debug\net8.0\refi
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Repo\obj\Debug\net8.0\Repo.pdb
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Repo\obj\Debug\net8.0\Repo.genruntimeconfig.cache
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Repo\obj\Debug\net8.0\ref\Repo.dll
+D:\Workspace\revature\WorkWave\Application\WorkWave\Repo\bin\Debug\net8.0\Repo.runtimeconfig.json
+D:\Workspace\revature\WorkWave\Application\WorkWave\Repo\obj\Debug\net8.0\Repo.genruntimeconfig.cache

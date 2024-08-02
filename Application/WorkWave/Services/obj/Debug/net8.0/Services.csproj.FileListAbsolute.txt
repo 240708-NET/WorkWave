@@ -36,3 +36,5 @@ C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Services\obj\Debug\net8.0\
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Services\obj\Debug\net8.0\ref\Services.dll
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Services\bin\Debug\net8.0\Services.runtimeconfig.json
 C:\Users\jlq54\Revature\WorkWave\Application\WorkWave\Services\obj\Debug\net8.0\Services.genruntimeconfig.cache
+D:\Workspace\revature\WorkWave\Application\WorkWave\Services\bin\Debug\net8.0\Services.runtimeconfig.json
+D:\Workspace\revature\WorkWave\Application\WorkWave\Services\obj\Debug\net8.0\Services.genruntimeconfig.cache
