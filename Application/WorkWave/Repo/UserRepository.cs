@@ -7,12 +7,8 @@ namespace Repository
     public class UserRepository : IRepository<User>
     {
         DataContext context;
-        public UserRepository(string connectionstring){
-            DbContextOptions<DataContext> options;
-            options = new DbContextOptionsBuilder<DataContext>()
-                            .UseSqlServer(connectionstring)
-                            .Options;
-            context = new DataContext(options);
+        public UserRepository(DataContext context){
+            this.context = context;
         }
 
         public void Delete(User user){
