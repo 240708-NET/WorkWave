@@ -11,8 +11,8 @@ using Repository;
 namespace Repo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240802223742_Initial")]
-    partial class Initial
+    [Migration("20240805161829_InitialDB")]
+    partial class InitialDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace Repo.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Board");
+                    b.ToTable("Boards");
                 });
 
             modelBuilder.Entity("Models.Card", b =>
@@ -111,7 +111,31 @@ namespace Repo.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Card");
+                    b.HasIndex("SectionID");
+
+                    b.ToTable("Cards");
+                });
+
+            modelBuilder.Entity("Models.Section", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("BoardID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BoardID");
+
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("Models.Tag", b =>
@@ -132,7 +156,7 @@ namespace Repo.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Models.User", b =>
@@ -203,6 +227,33 @@ namespace Repo.Migrations
                         .HasForeignKey("UsersAssignedID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Card", b =>
+                {
+                    b.HasOne("Models.Section", "Section")
+                        .WithMany("Cards")
+                        .HasForeignKey("SectionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("Models.Section", b =>
+                {
+                    b.HasOne("Models.Board", "Board")
+                        .WithMany()
+                        .HasForeignKey("BoardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Board");
+                });
+
+            modelBuilder.Entity("Models.Section", b =>
+                {
+                    b.Navigation("Cards");
                 });
 #pragma warning restore 612, 618
         }
