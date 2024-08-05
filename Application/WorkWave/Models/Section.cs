@@ -4,7 +4,7 @@ namespace Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int BoardID { get; set; }
+        public Board Board { get; set; }
         public List<Card> Cards { get; set; }
     }
 }
