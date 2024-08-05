@@ -1,5 +1,6 @@
 import colstyles from "./Column.module.css"
 import Card from "@/app/components/Card/Card";
+import TaskField from "@/app/components/TaskField/TaskField"
 
 
 
@@ -37,6 +38,7 @@ interface ColumnProps {
         {tasks.map((task, index) => (
           <Card key={index} task={task} onDragStart={onDragStart} />
         ))}
+        <TaskField/>
       </div>
     );
   }

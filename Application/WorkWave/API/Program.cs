@@ -35,6 +35,8 @@ builder.Services.AddScoped<CardService>();
 builder.Services.AddScoped<SectionRepository>();
 builder.Services.AddScoped<SectionService>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,5 +51,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(options =>
+    options.AllowAnyHeader()
+    .WithOrigins("http://localhost:3000")
+    .AllowAnyMethod()
+    .AllowCredentials()
+);
 
 app.Run();

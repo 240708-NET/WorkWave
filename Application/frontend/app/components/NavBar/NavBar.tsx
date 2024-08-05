@@ -1,12 +1,12 @@
 import navstyles from "./NavBar.module.css"
 
-function NavBar () {
+function NavBar ({showLogin, setShowLogin} : {showLogin: Function, setShowLogin: Function}) {
 
     return (
         <div className={navstyles.navBar}>
       <h3>WorkWave</h3>
       <div>
-        <p>Login</p>
+        <p onClick={()=> {setShowLogin(true); console.log('clicked')}} id={navstyles.login}>Login</p>
 
         </div>
 
