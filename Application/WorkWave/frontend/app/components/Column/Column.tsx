@@ -1,4 +1,4 @@
-import colstyles from "./Column.module.css"
+import colstyles from "Column.module.css"
 function Column(){
 
     const names = [
