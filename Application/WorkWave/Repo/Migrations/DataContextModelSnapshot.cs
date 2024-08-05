@@ -130,6 +130,8 @@ namespace Repo.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("BoardID");
+
                     b.ToTable("Sections");
                 });
 
@@ -226,11 +228,24 @@ namespace Repo.Migrations
 
             modelBuilder.Entity("Models.Card", b =>
                 {
-                    b.HasOne("Models.Section", null)
+                    b.HasOne("Models.Section", "Section")
                         .WithMany("Cards")
                         .HasForeignKey("SectionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("Models.Section", b =>
+                {
+                    b.HasOne("Models.Board", "Board")
+                        .WithMany()
+                        .HasForeignKey("BoardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Board");
                 });
 
             modelBuilder.Entity("Models.Section", b =>

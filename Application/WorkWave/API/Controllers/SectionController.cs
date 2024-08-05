@@ -7,36 +7,36 @@ namespace API.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class SectionController : ControllerBase
     {
-        private readonly ILogger<User> logger;
+        private readonly ILogger<Section> logger;
 
-        private UserService service;
+        private SectionService service;
 
-        public UserController(ILogger<User> logger, UserService service)
+        public SectionController(ILogger<Section> logger, SectionService service)
         {
             this.logger = logger;
             this.service = service;
         }
 
         [HttpGet]
-        public List<User> GetAll()
+        public List<Section> GetAll()
         {
             return this.service.GetAll();
         }
 
         [HttpGet("{id}")]
-        public User GetById( int id )
+        public Section GetById( int id )
         {
             return this.service.GetById(id);
         }
 
         [HttpPut]
-        public bool Update(User user)
+        public bool Update(Section section)
         {
             try
             {
-                this.service.Update(user);
+                this.service.Update(section);
                 return true;
             }
             catch (System.Exception)
@@ -48,14 +48,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public User Insert( [FromBody] User user )
+        public Section Insert( [FromBody] Section section )
         {
             try
             {
-                this.service.Save(user);
-                var users = this.service.GetAll();
+                this.service.Save(section);
+                var sections = this.service.GetAll();
 
-                return users.OrderByDescending(u => u.ID).FirstOrDefault();
+                return sections.OrderByDescending(s => s.ID).FirstOrDefault();
             }
             catch
             {
