@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
 
-namespace Controllers
+namespace API.Controllers
 {
 
     [ApiController]

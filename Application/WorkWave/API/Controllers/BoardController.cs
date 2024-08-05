@@ -7,36 +7,36 @@ namespace API.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class BoardController : ControllerBase
     {
-        private readonly ILogger<User> logger;
+        private readonly ILogger<Board> logger;
 
-        private UserService service;
+        private BoardService service;
 
-        public UserController(ILogger<User> logger, UserService service)
+        public BoardController(ILogger<Board> logger, BoardService service)
         {
             this.logger = logger;
             this.service = service;
         }
 
         [HttpGet]
-        public List<User> GetAll()
+        public List<Board> GetAll()
         {
             return this.service.GetAll();
         }
 
         [HttpGet("{id}")]
-        public User GetById( int id )
+        public Board GetById( int id )
         {
             return this.service.GetById(id);
         }
 
         [HttpPut]
-        public bool Update(User user)
+        public bool Update(Board board)
         {
             try
             {
-                this.service.Update(user);
+                this.service.Update(board);
                 return true;
             }
             catch (System.Exception)
@@ -48,18 +48,18 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public User Insert( [FromBody] User user )
+        public Board Insert( [FromBody] Board board )
         {
             try
             {
-                this.service.Save(user);
-                var users = this.service.GetAll();
+                this.service.Save(board);
+                var boards = this.service.GetAll();
 
-                return users.OrderByDescending(u => u.ID).FirstOrDefault();
+                return boards.OrderByDescending(u => u.ID).FirstOrDefault();
             }
             catch
             {
-                return new User();
+                return new Board();
             }
         }
 

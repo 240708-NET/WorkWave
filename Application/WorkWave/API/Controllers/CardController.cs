@@ -7,36 +7,36 @@ namespace API.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class CardController : ControllerBase
     {
-        private readonly ILogger<User> logger;
+        private readonly ILogger<Card> logger;
 
-        private UserService service;
+        private CardService service;
 
-        public UserController(ILogger<User> logger, UserService service)
+        public CardController(ILogger<Card> logger, CardService service)
         {
             this.logger = logger;
             this.service = service;
         }
 
         [HttpGet]
-        public List<User> GetAll()
+        public List<Card> GetAll()
         {
             return this.service.GetAll();
         }
 
         [HttpGet("{id}")]
-        public User GetById( int id )
+        public Card GetById( int id )
         {
             return this.service.GetById(id);
         }
 
         [HttpPut]
-        public bool Update(User user)
+        public bool Update(Card card)
         {
             try
             {
-                this.service.Update(user);
+                this.service.Update(card);
                 return true;
             }
             catch (System.Exception)
@@ -48,18 +48,18 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public User Insert( [FromBody] User user )
+        public Card Insert( [FromBody] Card card )
         {
             try
             {
-                this.service.Save(user);
-                var users = this.service.GetAll();
+                this.service.Save(card);
+                var cards = this.service.GetAll();
 
-                return users.OrderByDescending(u => u.ID).FirstOrDefault();
+                return cards.OrderByDescending(u => u.ID).FirstOrDefault();
             }
             catch
             {
-                return new User();
+                return new Card();
             }
         }
 
