@@ -7,36 +7,36 @@ namespace Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class TagController : ControllerBase
     {
-        private readonly ILogger<User> logger;
+        private readonly ILogger<Tag> logger;
 
-        private UserService service;
+        private TagService service;
 
-        public UserController(ILogger<User> logger, UserService service)
+        public TagController(ILogger<Tag> logger, TagService service)
         {
             this.logger = logger;
             this.service = service;
         }
 
         [HttpGet]
-        public List<User> GetAll()
+        public List<Tag> GetAll()
         {
             return this.service.GetAll();
         }
 
         [HttpGet("{id}")]
-        public User GetById( int id )
+        public Tag GetById( int id )
         {
             return this.service.GetById(id);
         }
 
         [HttpPut]
-        public bool Update(User user)
+        public bool Update(Tag tag)
         {
             try
             {
-                this.service.Update(user);
+                this.service.Update(tag);
                 return true;
             }
             catch (System.Exception)
@@ -48,18 +48,18 @@ namespace Controllers
         }
 
         [HttpPost]
-        public User Insert( [FromBody] User user )
+        public Tag Insert( [FromBody] Tag tag )
         {
             try
             {
-                this.service.Save(user);
-                var users = this.service.GetAll();
+                this.service.Save(tag);
+                var tags = this.service.GetAll();
 
-                return users.OrderByDescending(u => u.ID).FirstOrDefault();
+                return tags.OrderByDescending(t => t.ID).FirstOrDefault();
             }
             catch
             {
-                return new User();
+                return new Tag();
             }
         }
 
