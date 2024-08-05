@@ -1,3 +1,4 @@
+using API.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
@@ -17,6 +18,14 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TagRepository>();
+builder.Services.AddScoped<TagService>();
+builder.Services.AddScoped<BoardRepository>();
+builder.Services.AddScoped<BoardService>();
+builder.Services.AddScoped<CardRepository>();
+builder.Services.AddScoped<CardService>();
+builder.Services.AddScoped<SectionRepository>();
+builder.Services.AddScoped<SectionService>();
 
 var app = builder.Build();
 

@@ -59,7 +59,7 @@ namespace API.Controllers
             }
             catch
             {
-                return new Board();
+                return null;
             }
         }
 
