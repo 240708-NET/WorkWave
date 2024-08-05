@@ -2,6 +2,7 @@ import colstyles from "./Column.module.css"
 import Card from "@/app/components/Card/Card";
 
 
+
 interface ColumnProps {
     name: string;
     tasks: string[];
