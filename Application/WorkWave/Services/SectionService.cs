@@ -24,14 +24,14 @@ public class SectionService
         repository.Delete(section);
     }
 
-    public void Save(Section section)
+    public Section Save(Section section)
     {
-        repository.Save(section);
+        return repository.Save(section);
     }
 
-    public void Update(Section section)
+    public Section Update(int id, Section section)
     {
-        repository.Update(section);
+        return repository.Update(id, section);
     }
 
     public Section GetById(int id)

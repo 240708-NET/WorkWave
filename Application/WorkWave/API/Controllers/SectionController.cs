@@ -20,60 +20,93 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<Section> GetAll()
-        {
-            return this.service.GetAll();
-        }
-
-        [HttpGet("{id}")]
-        public Section GetById( int id )
-        {
-            return this.service.GetById(id);
-        }
-
-        [HttpPut]
-        public bool Update(Section section)
+        public ActionResult<List<Section>> GetAll()
         {
             try
             {
-                this.service.Update(section);
-                return true;
+                return Ok(service.GetAll());
             }
-            catch (System.Exception)
+            catch(Exception e)
             {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
 
-                return false;
+        [HttpGet("{id}")]
+        public ActionResult<Section> GetById( int id )
+        {
+            try
+            {
+                Section section = this.service.GetById(id);
+                return section != null ? Ok(section) : NotFound("Section not found!");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<Section> Update(int id, Section section)
+        {
+            try
+            {
+                if(id != section.ID){
+                    return BadRequest("Section ID mismatch.");
+                }
+
+                Section sectionFound = this.service.GetById(id);
+
+                if (sectionFound == null){
+                    return NotFound($"Section with Id = {id} not found");
+                }
+                
+                return this.service.Update(id, section);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         
         }
 
         [HttpPost]
-        public Section Insert( [FromBody] Section section )
+        public ActionResult<Section> Insert( [FromBody] Section section )
         {
             try
             {
-                this.service.Save(section);
-                var sections = this.service.GetAll();
+                Section sectionCreated = this.service.Save(section);
 
-                return sections.OrderByDescending(s => s.ID).FirstOrDefault();
+                return CreatedAtAction(nameof(GetById), new { id = sectionCreated.ID }, sectionCreated);
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public bool Delete( int id )
+        public ActionResult Delete( int id )
         {
             try
             {
+                Section sectionFound = this.service.GetById(id);
+
+                if (sectionFound == null){
+                    return NotFound($"Section with Id = {id} not found");
+                }
+
                 this.service.DeleteById( id );
-                return true;
+                return Ok($"Section with Id = {id} Deleted!");
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 

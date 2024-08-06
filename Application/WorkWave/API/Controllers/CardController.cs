@@ -20,60 +20,93 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<Card> GetAll()
+        public ActionResult<List<Card>> GetAll()
         {
-            return this.service.GetAll();
+           try
+            {
+                return Ok(service.GetAll());
+            }
+            catch(Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet("{id}")]
-        public Card GetById( int id )
-        {
-            return this.service.GetById(id);
-        }
-
-        [HttpPut]
-        public bool Update(Card card)
+        public ActionResult<Card> GetById( int id )
         {
             try
             {
-                this.service.Update(card);
-                return true;
+                Card card = this.service.GetById(id);
+                return card != null ? Ok(card) : NotFound("Card not found!");
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
 
-                return false;
+        [HttpPut]
+        public ActionResult<Card> Update(int id, Card card)
+        {
+            try
+            {
+                if(id != card.ID){
+                    return BadRequest("Card ID mismatch.");
+                }
+
+                Card cardFound = this.service.GetById(id);
+
+                if (cardFound == null){
+                    return NotFound($"Card with Id = {id} not found");
+                }
+                
+                return this.service.Update(id, card);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         
         }
 
         [HttpPost]
-        public Card Insert( [FromBody] Card card )
+        public ActionResult<Card> Insert( [FromBody] Card card )
         {
             try
             {
-                this.service.Save(card);
-                var cards = this.service.GetAll();
+                Card cardCreated = this.service.Save(card);
 
-                return cards.OrderByDescending(u => u.ID).FirstOrDefault();
+                return CreatedAtAction(nameof(GetById), new { id = cardCreated.ID }, cardCreated);
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public bool Delete( int id )
+        public ActionResult Delete( int id )
         {
             try
             {
+                Card cardFound = this.service.GetById(id);
+
+                if (cardFound == null){
+                    return NotFound($"Card with Id = {id} not found");
+                }
+
                 this.service.DeleteById( id );
-                return true;
+                return Ok($"Card with Id = {id} Deleted!");
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 

@@ -24,14 +24,14 @@ public class BoardService
         repository.Delete(board);
     }
 
-    public void Save(Board board)
+    public Board Save(Board board)
     {
-        repository.Save(board);
+        return repository.Save(board);
     }
 
-    public void Update(Board board)
+    public Board Update(int id, Board board)
     {
-        repository.Update(board);
+        return repository.Update(id, board);
     }
 
     public Board GetById(int id)

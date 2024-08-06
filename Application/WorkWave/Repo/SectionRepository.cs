@@ -19,12 +19,13 @@ namespace Repository
                 return context.Sections.ToList();
         }
 
-        public void Save(Section section){
+        public Section Save(Section section){
                 context.Add(section);
                 context.SaveChanges();
+            return section;
         }
 
-        public void Update(Section section){
+        public Section Update(int id, Section section){
 
                 Section sectionToUpdate = context.Sections.Find(section.ID);
 
@@ -32,7 +33,10 @@ namespace Repository
                     sectionToUpdate.Name = section.Name;
                     sectionToUpdate.Board = context.Boards.Find(section.Board.ID);
                     context.SaveChanges();
+                    return context.Sections.Find(section.ID);
                 }
+
+            return null;
         }
 
         public Section GetById(int id){

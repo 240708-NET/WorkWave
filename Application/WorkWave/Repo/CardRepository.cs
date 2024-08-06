@@ -19,21 +19,25 @@ namespace Repository
                 return context.Cards.ToList();
         }
 
-        public void Save(Card card){
+        public Card Save(Card card){
                 context.Add(card);
                 context.SaveChanges();
+            return card;
         }
 
-        public void Update(Card card){
+        public Card Update(int id, Card card){
 
-                Card cardToUpdate = context.Cards.Find(card.ID);
+                Card cardToUpdate = context.Cards.Find(id);
 
                 if(card != null){
                     cardToUpdate.Title = card.Title;
                     cardToUpdate.Description = card.Description;
                     cardToUpdate.Section = context.Sections.Find(card.Section.ID);
                     context.SaveChanges();
+                    return context.Cards.Find(id);
                 }
+
+            return null;
         }
 
         public Card GetById(int id){

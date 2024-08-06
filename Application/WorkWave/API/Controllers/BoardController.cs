@@ -20,60 +20,93 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<Board> GetAll()
-        {
-            return this.service.GetAll();
-        }
-
-        [HttpGet("{id}")]
-        public Board GetById( int id )
-        {
-            return this.service.GetById(id);
-        }
-
-        [HttpPut]
-        public bool Update(Board board)
+        public ActionResult<List<Board>> GetAll()
         {
             try
             {
-                this.service.Update(board);
-                return true;
+                return Ok(service.GetAll());
             }
-            catch (System.Exception)
+            catch(Exception e)
             {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
 
-                return false;
+        [HttpGet("{id}")]
+        public ActionResult<Board> GetById( int id )
+        {
+            try
+            {
+                Board board = this.service.GetById(id);
+                return board != null ? Ok(board) : NotFound("Board not found!");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<Board> Update(int id, Board board)
+        {
+            try
+            {
+                if(id != board.ID){
+                    return BadRequest("Board ID mismatch.");
+                }
+
+                Board boardFound = this.service.GetById(id);
+
+                if (boardFound == null){
+                    return NotFound($"Board with Id = {id} not found");
+                }
+                
+                return this.service.Update(id, board);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         
         }
 
         [HttpPost]
-        public Board Insert( [FromBody] Board board )
+        public ActionResult<Board> Insert( [FromBody] Board board )
         {
             try
             {
-                this.service.Save(board);
-                var boards = this.service.GetAll();
+                Board boardCreated = this.service.Save(board);
 
-                return boards.OrderByDescending(u => u.ID).FirstOrDefault();
+                return CreatedAtAction(nameof(GetById), new { id = boardCreated.ID }, boardCreated);
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public bool Delete( int id )
+        public ActionResult Delete( int id )
         {
             try
             {
+                Board boardFound = this.service.GetById(id);
+
+                if (boardFound == null){
+                    return NotFound($"Board with Id = {id} not found");
+                }
+
                 this.service.DeleteById( id );
-                return true;
+                return Ok($"Board with Id = {id} Deleted!");
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 

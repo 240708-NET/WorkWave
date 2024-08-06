@@ -20,60 +20,93 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<Tag> GetAll()
+        public ActionResult<List<Tag>> GetAll()
         {
-            return this.service.GetAll();
+             try
+            {
+                return Ok(service.GetAll());
+            }
+            catch(Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet("{id}")]
-        public Tag GetById( int id )
-        {
-            return this.service.GetById(id);
-        }
-
-        [HttpPut]
-        public bool Update(Tag tag)
+        public ActionResult<Tag> GetById( int id )
         {
             try
             {
-                this.service.Update(tag);
-                return true;
+                Tag tag = this.service.GetById(id);
+                return tag != null ? Ok(tag) : NotFound("Tag not found!");
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+        }
 
-                return false;
+        [HttpPut]
+        public ActionResult<Tag> Update(int id, Tag tag)
+        {
+            try
+            {
+                if(id != tag.ID){
+                    return BadRequest("Tag ID mismatch.");
+                }
+
+                Tag tagFound = this.service.GetById(id);
+
+                if (tagFound == null){
+                    return NotFound($"Tag with Id = {id} not found");
+                }
+                
+                return this.service.Update(id, tag);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         
         }
 
         [HttpPost]
-        public Tag Insert( [FromBody] Tag tag )
+        public ActionResult<Tag> Insert( [FromBody] Tag tag )
         {
-            try
+             try
             {
-                this.service.Save(tag);
-                var tags = this.service.GetAll();
+                Tag tagCreated = this.service.Save(tag);
 
-                return tags.OrderByDescending(t => t.ID).FirstOrDefault();
+                return CreatedAtAction(nameof(GetById), new { id = tagCreated.ID }, tagCreated);
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public bool Delete( int id )
+        public ActionResult Delete( int id )
         {
             try
             {
+                Tag tagFound = this.service.GetById(id);
+
+                if (tagFound == null){
+                    return NotFound($"Tag with Id = {id} not found");
+                }
+
                 this.service.DeleteById( id );
-                return true;
+                return Ok($"Tag with Id = {id} Deleted!");
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
