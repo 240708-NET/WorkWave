@@ -24,14 +24,14 @@ public class TagService
         repository.Delete(tag);
     }
 
-    public void Save(Tag tag)
+    public Tag Save(Tag tag)
     {
-        repository.Save(tag);
+        return repository.Save(tag);
     }
 
-    public void Update(Tag tag)
+    public Tag Update(int id, Tag tag)
     {
-        repository.Update(tag);
+        return repository.Update(id, tag);
     }
 
     public Tag GetById(int id)

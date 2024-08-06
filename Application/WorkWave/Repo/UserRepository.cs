@@ -19,21 +19,25 @@ namespace Repository
                 return context.Users.ToList();
         }
 
-        public void Save(User user){
+        public User Save(User user){
                 context.Add(user);
                 context.SaveChanges();
+            return user;
         }
 
-        public void Update(User user){
+        public User Update(int id, User user){
 
-                User userToUpdate = context.Users.Find(user.ID);
+                User userToUpdate = context.Users.Find(id);
 
                 if(user != null){
                     userToUpdate.FullName = user.FullName;
                     userToUpdate.Email = user.Email;
                     userToUpdate.Password = user.Password;
                     context.SaveChanges();
+                    return context.Users.Find(id);
                 }
+
+            return null;
         }
 
         public User GetById(int id){

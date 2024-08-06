@@ -20,60 +20,96 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<User> GetAll()
-        {
-            return this.service.GetAll();
-        }
-
-        [HttpGet("{id}")]
-        public User GetById( int id )
-        {
-            return this.service.GetById(id);
-        }
-
-        [HttpPut]
-        public bool Update(User user)
+        public ActionResult<List<User>> GetAll()
         {
             try
             {
-                this.service.Update(user);
-                return true;
+                return Ok(service.GetAll());
             }
-            catch (System.Exception)
+            catch(Exception e)
             {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+            
+        }
 
-                return false;
+        [HttpGet("{id}")]
+        public ActionResult<User> GetById( int id )
+        {
+            try
+            {
+                User user = this.service.GetById(id);
+                return user != null ? Ok(user) : NotFound("User not found!");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult<User> Update(int id, User user)
+        {
+            try
+            {
+                if(id != user.ID){
+                    return BadRequest("User ID mismatch.");
+                }
+
+                User userFound = this.service.GetById(id);
+
+                if (userFound == null){
+                    return NotFound($"User with Id = {id} not found");
+                }
+                
+                return this.service.Update(id, user);
+                //return Update Ok("User updated!");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         
         }
 
         [HttpPost]
-        public User Insert( [FromBody] User user )
+        public ActionResult<User> Insert( [FromBody] User user )
         {
             try
             {
-                this.service.Save(user);
-                var users = this.service.GetAll();
+                User userCreated = this.service.Save(user);
 
-                return users.OrderByDescending(u => u.ID).FirstOrDefault();
+                return CreatedAtAction(nameof(GetById), new { id = userCreated.ID }, userCreated);
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public bool Delete( int id )
+        public ActionResult Delete( int id )
         {
             try
             {
+                User userFound = this.service.GetById(id);
+
+                if (userFound == null){
+                    return NotFound($"User with Id = {id} not found");
+                }
+
                 this.service.DeleteById( id );
-                return true;
+                return Ok($"User with Id = {id} Deleted!");
             }
-            catch
+            catch(Exception e)
             {
-                return false;
+                logger.LogError(e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 

@@ -24,14 +24,14 @@ public class UserService
         repository.Delete(user);
     }
 
-    public void Save(User user)
+    public User Save(User user)
     {
-        repository.Save(user);
+        return repository.Save(user);
     }
 
-    public void Update(User user)
+    public User Update(int id, User user)
     {
-        repository.Update(user);
+        return repository.Update(id, user);
     }
 
     public User GetById(int id)

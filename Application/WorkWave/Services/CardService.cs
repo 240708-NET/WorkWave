@@ -24,14 +24,14 @@ public class CardService
         repository.Delete(card);
     }
 
-    public void Save(Card card)
+    public Card Save(Card card)
     {
-        repository.Save(card);
+        return repository.Save(card);
     }
 
-    public void Update(Card card)
+    public Card Update(int id, Card card)
     {
-        repository.Update(card);
+        return repository.Update(id, card);
     }
 
     public Card GetById(int id)

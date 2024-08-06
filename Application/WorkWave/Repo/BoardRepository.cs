@@ -19,12 +19,13 @@ namespace Repository
                 return context.Boards.ToList();
         }
 
-        public void Save(Board board){
+        public Board Save(Board board){
                 context.Add(board);
                 context.SaveChanges();
+            return board;
         }
 
-        public void Update(Board board){
+        public Board Update(int id, Board board){
 
                 Board boardToUpdate = context.Boards.Find(board.ID);
 
@@ -32,7 +33,9 @@ namespace Repository
                     boardToUpdate.Name = board.Name;
                     boardToUpdate.Description = board.Description;
                     context.SaveChanges();
+                    return context.Boards.Find(board.ID);
                 }
+                return null;
         }
 
         public Board GetById(int id){

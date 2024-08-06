@@ -3,9 +3,9 @@ namespace Repository{
 
     public interface IRepository<T>{
 
-        void Save(T t);
+        T Save(T t);
 
-        void Update(T t);
+        T Update(int Id, T t);
 
         List<T> List();
 

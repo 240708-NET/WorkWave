@@ -19,12 +19,14 @@ namespace Repository
                 return context.Tags.ToList();
         }
 
-        public void Save(Tag tag){
-                context.Add(tag);
-                context.SaveChanges();
+        public Tag Save(Tag tag)
+        {
+            context.Add(tag);
+            context.SaveChanges();
+            return tag;
         }
 
-        public void Update(Tag tag){
+        public Tag Update(int id, Tag tag){
 
                 Tag tagToUpdate = context.Tags.Find(tag.ID);
 
@@ -32,7 +34,9 @@ namespace Repository
                     tagToUpdate.Description = tag.Description;
                     tagToUpdate.Color = tag.Color;
                     context.SaveChanges();
+                    return context.Tags.Find(tag.ID);
                 }
+                return null;
         }
 
         public Tag GetById(int id){
