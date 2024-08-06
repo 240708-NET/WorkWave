@@ -1,3 +1,4 @@
+import TaskField from "../TaskField/TaskField";
 import colstyles from "./Column.module.css"
 import Card from "@/app/components/Card/Card";
 
@@ -26,7 +27,9 @@ interface ColumnProps {
     onDragStart: (event: React.DragEvent<HTMLDivElement>, task: string) => void;
   }
   
-  function Column({ name, tasks, onDrop, onDragOver, onDragStart }: ColumnProps) {
+  function Column({ addTask, name, tasks, onDrop, onDragOver, onDragStart }: ColumnProps) {
+
+    
     return (
       <div
         className={colstyles.column}
@@ -37,7 +40,9 @@ interface ColumnProps {
         {tasks.map((task, index) => (
           <Card key={index} task={task} onDragStart={onDragStart} />
         ))}
+        <TaskField name={name} addTask={addTask} />
       </div>
+
     );
   }
 
