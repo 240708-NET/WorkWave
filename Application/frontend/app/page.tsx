@@ -1,32 +1,38 @@
 "use client"
-import {useState} from "react"
+import {useState, useContext, useEffect} from "react"
 import styles from "./page.module.css";
 import NavBar from "@/app/components/NavBar/NavBar"
 import Column from "@/app/components/Column/Column"
 import Board from "@/app/components/Board/Board"
-import Login from "@/app/components/Login/Login";
-import axios from 'axios'
+
+import Login from "./components/Login/Login";
+import {UserContext, UserProvider} from "./context/UserContext";
 
 export default function Home() {
+  const {username, password} = useContext(UserContext)
   const [showLogin, setShowLogin] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
 
-  const getBoard = async () => {
-    const response = await axios.get('http://localhost:5012/Board');
-
-    console.log(response)
+  const login = () => {
+    console.log('login clicked')
+    
+      setShowLogin(false);
+      setLoggedIn(true);
+    
   }
-
-  getBoard();
-
   
   return (
     
+    <UserProvider>
     <main className={styles.main}>
-      <NavBar showLogin={showLogin} setShowLogin={setShowLogin}/>
-      {showLogin && <Login />}
+
+      <NavBar loggedIn={loggedIn} showLogin={showLogin} setShowLogin={setShowLogin} />
+
       <Board/>
+      {showLogin && (<Login login={login} />)}
     </main>
+    </UserProvider>
   );
  
 }

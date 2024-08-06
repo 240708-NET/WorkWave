@@ -8,7 +8,13 @@
     
   }
 
-  #login {
-    cursor: pointer;
+
+  .user {
+    display: flex;
+    column-gap: 4px;
+  }
+
+  #logout {
+    color: gray;
   }
   
