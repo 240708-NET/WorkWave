@@ -8,10 +8,14 @@ function NavBar ({loggedIn, showLogin, setShowLogin}) {
   let date = new Date();
 
 
+function NavBar ({showLogin, setShowLogin} : {showLogin: Function, setShowLogin: Function}) {
+
+
     return (
         <div className={navstyles.navBar}>
       <h3>WorkWave</h3>
       <div>
+
         {(username  && loggedIn)? (
           <div className={navstyles.user}>
           <p>{date.getHours() > 19 ? "Good evening, " : date.getHours() < 12 ? "Good morning, " : "Good afternoon, "}{username}</p>
@@ -21,6 +25,7 @@ function NavBar ({loggedIn, showLogin, setShowLogin}) {
         ):(
           <p onClick={()=>{setShowLogin(true)}}>Login</p>
         )}
+
 
         </div>
 

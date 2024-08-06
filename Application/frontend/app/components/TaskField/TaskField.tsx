@@ -9,6 +9,8 @@ function TaskField({name, addTask}){
         <input type="text" placeholder="Add a new task" value={text} onChange={e => setText(e.target.value)}/>
         <button onClick={()=> {addTask(name, text ); setText("")}}>+</button>
        </div>
+
+
     )
 }
 

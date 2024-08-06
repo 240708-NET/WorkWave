@@ -10,6 +10,7 @@ function Login ({login}) {
             <input onChange={e => setUsername(e.target.value)} type="text" placeholder="username"/>
             <input onChange={e => setPassword(e.target.value)} type="text" placeholder="password"/>
             <button onClick={login}>Login</button>
+
         </div>
     )
 }

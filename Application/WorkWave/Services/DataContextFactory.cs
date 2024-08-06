@@ -21,6 +21,7 @@ namespace Services
                 throw new InvalidOperationException("Connection string 'DefaultConnection' is not set.");
             }
 
+
             builder.UseSqlServer(connectionString);
 
             return new DataContext(builder.Options);

@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import colstyles from "../Column/Column.module.css"
-import Column from "@/app/components/Column/Column";
+
+
 
 function Board() {
   const [columns, setColumns] = useState({
