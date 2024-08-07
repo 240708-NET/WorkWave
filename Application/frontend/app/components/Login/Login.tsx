@@ -4,12 +4,18 @@ import { UserContext } from '@/app/context/UserContext'
 
 function Login ({login}) {
     const {username, password, setUsername, setPassword} = useContext(UserContext)
+
+    const handleLogin = () => {
+        if(username && password){
+            login();
+        }
+    }
     return (
         <div className={loginstyles.login}>
             <h2>WorkWave</h2>
             <input onChange={e => setUsername(e.target.value)} type="text" placeholder="username"/>
-            <input onChange={e => setPassword(e.target.value)} type="text" placeholder="password"/>
-            <button onClick={login}>Login</button>
+            <input onChange={e => setPassword(e.target.value)} type="password" placeholder="password"/>
+            <button onClick={handleLogin}>Login</button>
 
         </div>
     )
