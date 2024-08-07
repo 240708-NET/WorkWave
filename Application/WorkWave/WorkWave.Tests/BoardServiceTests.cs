@@ -14,7 +14,7 @@ public class BoardServiceTests
     {
         // Arrange
         Mock<IRepository<Board>> repo = new Mock<IRepository<Board>>();
-        var expectedBoards = new List<Board>
+        List<Board> expectedBoards = new List<Board>
             {
                 new Board {ID = 1, Name = "Board 1", Description = "This is the first board.", Users = new List<User>()},
                 new Board {ID = 2, Name = "Board 2", Description = "This is the second board.", Users = new List<User>()}
@@ -66,7 +66,7 @@ public class BoardServiceTests
     {
         // Arrange
         Mock<IRepository<Board>> repo = new Mock<IRepository<Board>>();
-        var newBoard = new Board { ID = 1, Name = "New Board", Description = "This is a new board for testing.", Users = new List<User>() };
+        Board newBoard = new Board { ID = 1, Name = "New Board", Description = "This is a new board for testing.", Users = new List<User>() };
         repo.Setup(x => x.Save(It.IsAny<Board>())).Returns(newBoard).Verifiable();
         BoardService boardService = new BoardService(repo.Object);
 
@@ -83,11 +83,11 @@ public class BoardServiceTests
     public void GetById_Successful()
     {
         // Arrange
-        var repo = new Mock<IRepository<Board>>();
-        var board = new Board { ID = 1, Name = "Board 1", Description = "This is the first board.", Users = new List<User>() };
+        Mock<IRepository<Board>> repo = new Mock<IRepository<Board>>();
+        Board board = new Board { ID = 1, Name = "Board 1", Description = "This is the first board.", Users = new List<User>() };
 
         repo.Setup(x => x.GetById(board.ID)).Returns(board);
-        var boardService = new BoardService(repo.Object);
+        BoardService boardService = new BoardService(repo.Object);
 
         // Act
         var result = boardService.GetById(board.ID);
@@ -101,11 +101,11 @@ public class BoardServiceTests
     public void DeleteById_Successful()
     {
         // Arrange
-        var repo = new Mock<IRepository<Board>>();
-        var boardToDelete = new Board { ID = 1, Name = "Board to Delete", Description = "This board will be deleted.", Users = new List<User>() };
+        Mock<IRepository<Board>> repo = new Mock<IRepository<Board>>();
+        Board boardToDelete = new Board { ID = 1, Name = "Board to Delete", Description = "This board will be deleted.", Users = new List<User>() };
         repo.Setup(x => x.GetById(boardToDelete.ID)).Returns(boardToDelete);
         repo.Setup(x => x.Delete(boardToDelete)).Verifiable();
-        var boardService = new BoardService(repo.Object);
+        BoardService boardService = new BoardService(repo.Object);
 
         // Act
         boardService.DeleteById(boardToDelete.ID);
@@ -119,13 +119,13 @@ public class BoardServiceTests
     public void Update_Successful()
     {
         // Arrange
-        var repo = new Mock<IRepository<Board>>();
-        var existingBoard = new Board { ID = 1, Name = "Existing Board", Description = "This is an existing board.", Users = new List<User>() };
-        var updatedBoard = new Board { ID = 1, Name = "Updated Board", Description = "This board has been updated.", Users = new List<User>() };
+        Mock<IRepository<Board>> repo = new Mock<IRepository<Board>>();
+        Board existingBoard = new Board { ID = 1, Name = "Existing Board", Description = "This is an existing board.", Users = new List<User>() };
+        Board updatedBoard = new Board { ID = 1, Name = "Updated Board", Description = "This board has been updated.", Users = new List<User>() };
 
         // Setup the mock repository
         repo.Setup(x => x.Update(existingBoard.ID, updatedBoard)).Returns(updatedBoard).Verifiable();
-        var boardService = new BoardService(repo.Object);
+        BoardService boardService = new BoardService(repo.Object);
 
         // Act
         var result = boardService.Update(existingBoard.ID, updatedBoard);
