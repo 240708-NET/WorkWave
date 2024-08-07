@@ -6,9 +6,9 @@ namespace Services;
 public class BoardService
 {
 
-    private BoardRepository repository;
+    private IRepository<Board> repository;
 
-    public BoardService(BoardRepository repository)
+    public BoardService(IRepository<Board> repository)
     {
         this.repository = repository;
     }
