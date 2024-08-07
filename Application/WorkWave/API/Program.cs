@@ -24,15 +24,15 @@ if(string.IsNullOrEmpty(connectionString)){
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<TagRepository>();
+builder.Services.AddScoped<IRepository<Tag>, TagRepository>();
 builder.Services.AddScoped<TagService>();
-builder.Services.AddScoped<BoardRepository>();
+builder.Services.AddScoped<IRepository<Board>, BoardRepository>();
 builder.Services.AddScoped<BoardService>();
-builder.Services.AddScoped<CardRepository>();
+builder.Services.AddScoped<IRepository<Card>, CardRepository>();
 builder.Services.AddScoped<CardService>();
-builder.Services.AddScoped<SectionRepository>();
+builder.Services.AddScoped<IRepository<section>, SectionRepository>();
 builder.Services.AddScoped<SectionService>();
 
 builder.Services.AddCors();

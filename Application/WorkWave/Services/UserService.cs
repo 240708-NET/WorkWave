@@ -6,9 +6,9 @@ namespace Services;
 public class UserService
 {
 
-    private UserRepository repository;
+    private IRepository<User> repository;
 
-    public UserService(UserRepository repository)
+    public UserService(IRepository<User> repository)
     {
         this.repository = repository;
     }

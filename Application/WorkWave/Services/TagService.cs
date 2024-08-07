@@ -6,9 +6,9 @@ namespace Services;
 public class TagService
 {
 
-    private TagRepository repository;
+    private IRepository<Tag> repository;
 
-    public TagService(TagRepository repository)
+    public TagService(IRepository<Tag> repository)
     {
         this.repository = repository;
     }

@@ -6,9 +6,9 @@ namespace Services;
 public class SectionService
 {
 
-    private SectionRepository repository;
+    private IRepository<Section> repository;
 
-    public SectionService(SectionRepository repository)
+    public SectionService(IRepository<Section> repository)
     {
         this.repository = repository;
     }
