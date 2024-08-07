@@ -6,9 +6,9 @@ namespace Services;
 public class CardService
 {
 
-    private CardRepository repository;
+    private IRepository<Card> repository;
 
-    public CardService(CardRepository repository)
+    public CardService(IRepository<Card> repository)
     {
         this.repository = repository;
     }
