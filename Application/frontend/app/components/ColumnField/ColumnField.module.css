@@ -1,0 +1,37 @@
+.task {
+
+    max-width: 200px;
+    max-height: 60px;
+    border-radius: 5px;
+    margin-top: 1rem;
+    column-gap: 4px;
+    display: flex;
+    flex-direction: row;
+}
+
+.task input {
+
+    padding: 1rem;
+    background-color: #3f3f46;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    margin-top: 1rem;
+
+}
+.task button {
+
+    padding: 1rem;
+    background-color: #0ea5e9;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    margin-top: 1rem;
+    
+
+}
+
+
+

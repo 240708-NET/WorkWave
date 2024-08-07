@@ -8,9 +8,6 @@ function NavBar ({loggedIn, showLogin, setShowLogin}) {
   let date = new Date();
 
 
-function NavBar ({showLogin, setShowLogin} : {showLogin: Function, setShowLogin: Function}) {
-
-
     return (
         <div className={navstyles.navBar}>
       <h3>WorkWave</h3>
@@ -32,5 +29,6 @@ function NavBar ({showLogin, setShowLogin} : {showLogin: Function, setShowLogin:
      </div>
     )
 }
+
 
 export default NavBar;
