@@ -32,4 +32,10 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <CoverletExclude Include="**WorkWave/Repository/**" />
+    <CoverletExclude Include="**WorkWave/Repo/**" />
+  </ItemGroup>
+
+
 </Project>
