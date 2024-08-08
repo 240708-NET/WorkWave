@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository;
 using DotNetEnv;
 using Services;
+using Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +33,7 @@ builder.Services.AddScoped<IRepository<Board>, BoardRepository>();
 builder.Services.AddScoped<BoardService>();
 builder.Services.AddScoped<IRepository<Card>, CardRepository>();
 builder.Services.AddScoped<CardService>();
-builder.Services.AddScoped<IRepository<section>, SectionRepository>();
+builder.Services.AddScoped<IRepository<Section>, SectionRepository>();
 builder.Services.AddScoped<SectionService>();
 
 builder.Services.AddCors();
