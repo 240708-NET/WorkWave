@@ -67,7 +67,7 @@ public class SectionServiceTests
         // Arrange
         Mock<IRepository<Section>> repo = new Mock<IRepository<Section>>();
         Board board1 = new Board { ID = 1, Name = "Board 1", Users = new List<User>() };
-        Section newSection= new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
+        Section newSection = new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
         repo.Setup(x => x.Save(newSection)).Returns(newSection).Verifiable();
         SectionService sectionService = new SectionService(repo.Object);
 
@@ -85,7 +85,7 @@ public class SectionServiceTests
         // Arrange
         Mock<IRepository<Section>> repo = new Mock<IRepository<Section>>();
         Board board1 = new Board { ID = 1, Name = "Board 1", Users = new List<User>() };
-        Section expectedSection= new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
+        Section expectedSection = new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
         repo.Setup(x => x.GetById(1)).Returns(expectedSection);
         SectionService sectionService = new SectionService(repo.Object);
 
@@ -102,8 +102,8 @@ public class SectionServiceTests
         // Arrange
         Mock<IRepository<Section>> repo = new Mock<IRepository<Section>>();
         Board board1 = new Board { ID = 1, Name = "Board 1", Users = new List<User>() };
-        Section existingSection= new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
-       
+        Section existingSection = new Section { ID = 1, Name = "Section 1", Board = board1, Cards = new List<Card>() };
+
         repo.Setup(x => x.GetById(existingSection.ID)).Returns(existingSection);
         repo.Setup(x => x.Delete(existingSection)).Verifiable();
         SectionService sectionService = new SectionService(repo.Object);
@@ -122,9 +122,9 @@ public class SectionServiceTests
         // Arrange
         Mock<IRepository<Section>> repo = new Mock<IRepository<Section>>();
         Board board1 = new Board { ID = 1, Name = "Board 1", Users = new List<User>() };
-        Section existingSection= new Section { ID = 1, Name = "Section to delete", Board = board1, Cards = new List<Card>() };
-        Section updatedSection= new Section { ID = 1, Name = "Section to update", Board = board1, Cards = new List<Card>() };
-        
+        Section existingSection = new Section { ID = 1, Name = "Section to delete", Board = board1, Cards = new List<Card>() };
+        Section updatedSection = new Section { ID = 1, Name = "Section to update", Board = board1, Cards = new List<Card>() };
+
         repo.Setup(x => x.Update(existingSection.ID, updatedSection)).Returns(updatedSection).Verifiable();
         SectionService sectionService = new SectionService(repo.Object);
 
