@@ -1,0 +1,2 @@
+# Kanban application (todo-doing-done task manager)
+- Description: Project manager that allows for CRUD functionality through vizualized workflow cards/boards. Create tasks to track, read/pull all current and previous tasks, update tasks (what the task is for, AND/OR task progress), and delete tasks (when complete or no longer needed). This application allows for user productivity tracking and management.
