@@ -17,7 +17,7 @@ namespace Repo.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,9 +44,9 @@ namespace Repo.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,28 +69,29 @@ namespace Repo.Migrations
                         name: "FK_Sections_Boards_BoardID",
                         column: x => x.BoardID,
                         principalTable: "Boards",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BoardUser",
+                name: "UserBoard",
                 columns: table => new
                 {
-                    BoardsID = table.Column<int>(type: "int", nullable: false),
-                    UsersID = table.Column<int>(type: "int", nullable: false)
+                    BoardID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BoardUser", x => new { x.BoardsID, x.UsersID });
+                    table.PrimaryKey("PK_UserBoard", x => new { x.BoardID, x.UserID });
                     table.ForeignKey(
-                        name: "FK_BoardUser_Boards_BoardsID",
-                        column: x => x.BoardsID,
+                        name: "FK_UserBoard_Boards_BoardID",
+                        column: x => x.BoardID,
                         principalTable: "Boards",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BoardUser_Users_UsersID",
-                        column: x => x.UsersID,
+                        name: "FK_UserBoard_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -104,7 +105,7 @@ namespace Repo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SectionID = table.Column<int>(type: "int", nullable: false)
+                    SectionID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,54 +122,49 @@ namespace Repo.Migrations
                 name: "CardTag",
                 columns: table => new
                 {
-                    CardsID = table.Column<int>(type: "int", nullable: false),
-                    TagsID = table.Column<int>(type: "int", nullable: false)
+                    CardID = table.Column<int>(type: "int", nullable: false),
+                    TagID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CardTag", x => new { x.CardsID, x.TagsID });
+                    table.PrimaryKey("PK_CardTag", x => new { x.CardID, x.TagID });
                     table.ForeignKey(
-                        name: "FK_CardTag_Cards_CardsID",
-                        column: x => x.CardsID,
+                        name: "FK_CardTag_Cards_CardID",
+                        column: x => x.CardID,
                         principalTable: "Cards",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CardTag_Tags_TagsID",
-                        column: x => x.TagsID,
+                        name: "FK_CardTag_Tags_TagID",
+                        column: x => x.TagID,
                         principalTable: "Tags",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CardUser",
+                name: "UserCard",
                 columns: table => new
                 {
-                    CardsID = table.Column<int>(type: "int", nullable: false),
-                    UsersAssignedID = table.Column<int>(type: "int", nullable: false)
+                    CardID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CardUser", x => new { x.CardsID, x.UsersAssignedID });
+                    table.PrimaryKey("PK_UserCard", x => new { x.CardID, x.UserID });
                     table.ForeignKey(
-                        name: "FK_CardUser_Cards_CardsID",
-                        column: x => x.CardsID,
+                        name: "FK_UserCard_Cards_CardID",
+                        column: x => x.CardID,
                         principalTable: "Cards",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CardUser_Users_UsersAssignedID",
-                        column: x => x.UsersAssignedID,
+                        name: "FK_UserCard_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BoardUser_UsersID",
-                table: "BoardUser",
-                column: "UsersID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_SectionID",
@@ -176,32 +172,37 @@ namespace Repo.Migrations
                 column: "SectionID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CardTag_TagsID",
+                name: "IX_CardTag_TagID",
                 table: "CardTag",
-                column: "TagsID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CardUser_UsersAssignedID",
-                table: "CardUser",
-                column: "UsersAssignedID");
+                column: "TagID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sections_BoardID",
                 table: "Sections",
                 column: "BoardID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBoard_UserID",
+                table: "UserBoard",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCard_UserID",
+                table: "UserCard",
+                column: "UserID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BoardUser");
-
-            migrationBuilder.DropTable(
                 name: "CardTag");
 
             migrationBuilder.DropTable(
-                name: "CardUser");
+                name: "UserBoard");
+
+            migrationBuilder.DropTable(
+                name: "UserCard");
 
             migrationBuilder.DropTable(
                 name: "Tags");

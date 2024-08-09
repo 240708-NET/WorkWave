@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Repository
@@ -16,10 +17,15 @@ namespace Repository
         }
 
         public List<Board> List(){
-                return context.Boards.ToList();
+                return context.Boards.Include(board => board.Users).ToList();
         }
 
         public Board Save(Board board){
+                List<User> users = new List<User>();
+                board.Users.ForEach(u => {
+                    users.Add(context.Users.Find(u.ID));
+                });
+                board.Users = users;
                 context.Add(board);
                 context.SaveChanges();
             return board;

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Repository
@@ -16,10 +17,11 @@ namespace Repository
         }
 
         public List<Card> List(){
-                return context.Cards.ToList();
+                return context.Cards.Include(card => card.Section).ToList();
         }
 
         public Card Save(Card card){
+                card.Section = context.Sections.Find(card.Section.ID);
                 context.Add(card);
                 context.SaveChanges();
             return card;

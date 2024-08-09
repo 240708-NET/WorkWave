@@ -8,9 +8,12 @@ public class BoardService
 
     private IRepository<Board> repository;
 
-    public BoardService(IRepository<Board> repository)
+    private UserService userService;
+
+    public BoardService(IRepository<Board> repository, UserService userService)
     {
         this.repository = repository;
+        this.userService = userService;
     }
 
     public List<Board> GetAll()
@@ -26,6 +29,7 @@ public class BoardService
 
     public Board Save(Board board)
     {
+        
         return repository.Save(board);
     }
 
