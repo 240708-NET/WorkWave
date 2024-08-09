@@ -1,6 +1,6 @@
 # Instruction on how to get WorkWave up and running
 
-- Clone our repository by using the HTTPS clone link provided on our repository page. Navigate to the workspace on your local machine where you want the project repository to be place then run "git clone linktoourrepo"
+- Clone our repository by using the HTTPS clone link provided on our repository page. Navigate to the workspace on your local machine where you want the project repository to be placed then run "git clone linktoourrepo"
 - Once the repository has been cloned follow the respective steps below to get the frontend and backend up and running.
 
 
