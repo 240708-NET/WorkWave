@@ -1,35 +1,40 @@
-import { useState } from "react";
-import colstyles from "../Column/Column.module.css"
+import { useContext, useState, useEffect } from "react";
+import colstyles from "../Column/Column.module.css";
 import Column from "../Column/Column";
 import ColumnField from "../ColumnField/ColumnField";
+import axios from "axios";
+import { UserContext } from "@/app/context/UserContext";
 
-
-
-
-function Board({title}) {
+function Board({ title }) {
   /* const [columns, setColumns] = useState({
     TODO: ["Task 1", "Task 2"],
     DOING: ["Task 3"],
     DONE: ["Task 4"],
   }); */
+  const { user, username, password } = useContext(UserContext);
+  const [columns, setColumns] = useState({});
+  
 
-  const [columns, setColumns] = useState({})
+  
+  const addTask = (col: string, newtask: string) => {
+    setColumns({ ...columns, [col]: [...columns[col], newtask] });
+  };
 
-  const addTask = (col : string, newtask: string) => {
-    
-    setColumns({...columns, [col]: [...columns[col], newtask]})
-   
-  }
+  const addColumn = (col: string) => {
+    setColumns({ ...columns, [col]: [] });
+  };
 
-  const addColumn = (col : string) => {
-    setColumns({...columns, [col]: []})
-  }
-
-  const handleDragStart = (event: React.DragEvent<HTMLDivElement>, task: string) => {
+  const handleDragStart = (
+    event: React.DragEvent<HTMLDivElement>,
+    task: string
+  ) => {
     event.dataTransfer.setData("text/plain", task);
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>, columnName: string) => {
+  const handleDrop = (
+    event: React.DragEvent<HTMLDivElement>,
+    columnName: string
+  ) => {
     const task = event.dataTransfer.getData("text");
     const updatedColumns = { ...columns };
     for (const key in updatedColumns) {
@@ -48,22 +53,21 @@ function Board({title}) {
 
   return (
     <>
-    <h2>{title}</h2>
-    <div className={colstyles.container}>
-      {Object.keys(columns).map((columnName) => (
-        <Column
-          key={columnName}
-          name={columnName}
-          tasks={columns[columnName]}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragStart={handleDragStart}
-          addTask={addTask}
-        />
-      ))}
-       <ColumnField addColumn={addColumn}/>
-    </div>
-   
+      <h2>{title}</h2>
+      <div className={colstyles.container}>
+        {Object.keys(columns).map((columnName) => (
+          <Column
+            key={columnName}
+            name={columnName}
+            tasks={columns[columnName]}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragStart={handleDragStart}
+            addTask={addTask}
+          />
+        ))}
+        <ColumnField addColumn={addColumn} />
+      </div>
     </>
   );
 }

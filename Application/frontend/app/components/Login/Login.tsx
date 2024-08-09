@@ -1,14 +1,83 @@
 import loginstyles from './Login.module.css'
-import {useContext, useState} from 'react'
+import {useContext, useState, useEffect} from 'react'
 import { UserContext } from '@/app/context/UserContext'
+import axios from 'axios'
+
+
 
 function Login ({login}) {
-    const {username, password, setUsername, setPassword} = useContext(UserContext)
+    const {user, username, password, setUsername, setPassword, setUser} = useContext(UserContext)
+    
 
-    const handleLogin = () => {
-        if(username && password){
-            login();
+    useEffect(()=> {
+        if(user != null){
+            console.log('user found!')
+            console.log(user)
+          }
+    }, [user])
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        console.log('Button clicked')
+        try {
+            const response = await axios.get(`http://localhost:5012/user`)
+            console.log(response.data)
+            const foundUser = response.data.find(x => x.email === username && x.password === password);
+            
+            if(foundUser){
+               console.log("Successful login!")
+                    login();
+
+
+                console.log(foundUser)
+            setUser(foundUser)
+            
+
+            } else {
+                const response = await axios.post(`http://localhost:5012/user`, {
+                    fullName: username,
+                    email: username,
+                    password,
+                    boards: [
+                        {
+                            name: 'Test Board',
+                            users: [username]
+                        }
+                    ]
+                }).then( async () => {
+
+                    const response = await axios.get(`http://localhost:5012/user`)
+            console.log(response.data)
+            const foundUser = response.data.find(x => x.email === username && x.password === password);
+            
+            if(foundUser){
+               console.log("Successful login!")
+                    login();
+
+
+                console.log(foundUser)
+            setUser(foundUser)
+            }
+
+                })
+
+                   
+
+            }
+                
+            
+
+        } catch (err){
+            console.log(err)
+
+            
+           
+
         }
+
+        
+       
+
     }
     return (
         <div className={loginstyles.login}>
