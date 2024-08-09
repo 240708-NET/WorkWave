@@ -38,12 +38,7 @@ function Login ({login}) {
                     fullName: username,
                     email: username,
                     password,
-                    boards: [
-                        {
-                            name: 'Test Board',
-                            users: [username]
-                        }
-                    ]
+                   
                 }).then( async () => {
 
                     const response = await axios.get(`http://localhost:5012/user`)
@@ -51,7 +46,7 @@ function Login ({login}) {
             const foundUser = response.data.find(x => x.email === username && x.password === password);
             
             if(foundUser){
-               console.log("Successful login!")
+               console.log("Successful signup!")
                     login();
 
 
