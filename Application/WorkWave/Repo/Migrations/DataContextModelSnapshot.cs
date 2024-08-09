@@ -22,49 +22,19 @@ namespace Repo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BoardUser", b =>
-                {
-                    b.Property<int>("BoardsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersID")
-                        .HasColumnType("int");
-
-                    b.HasKey("BoardsID", "UsersID");
-
-                    b.HasIndex("UsersID");
-
-                    b.ToTable("BoardUser");
-                });
-
             modelBuilder.Entity("CardTag", b =>
                 {
-                    b.Property<int>("CardsID")
+                    b.Property<int>("CardID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TagsID")
+                    b.Property<int>("TagID")
                         .HasColumnType("int");
 
-                    b.HasKey("CardsID", "TagsID");
+                    b.HasKey("CardID", "TagID");
 
-                    b.HasIndex("TagsID");
+                    b.HasIndex("TagID");
 
                     b.ToTable("CardTag");
-                });
-
-            modelBuilder.Entity("CardUser", b =>
-                {
-                    b.Property<int>("CardsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersAssignedID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CardsID", "UsersAssignedID");
-
-                    b.HasIndex("UsersAssignedID");
-
-                    b.ToTable("CardUser");
                 });
 
             modelBuilder.Entity("Models.Board", b =>
@@ -76,6 +46,7 @@ namespace Repo.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -98,7 +69,7 @@ namespace Repo.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SectionID")
+                    b.Property<int?>("SectionID")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -164,15 +135,12 @@ namespace Repo.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -180,47 +148,47 @@ namespace Repo.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BoardUser", b =>
+            modelBuilder.Entity("UserBoard", b =>
                 {
-                    b.HasOne("Models.Board", null)
-                        .WithMany()
-                        .HasForeignKey("BoardsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("BoardID")
+                        .HasColumnType("int");
 
-                    b.HasOne("Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("BoardID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserBoard");
+                });
+
+            modelBuilder.Entity("UserCard", b =>
+                {
+                    b.Property<int>("CardID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CardID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserCard");
                 });
 
             modelBuilder.Entity("CardTag", b =>
                 {
                     b.HasOne("Models.Card", null)
                         .WithMany()
-                        .HasForeignKey("CardsID")
+                        .HasForeignKey("CardID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CardUser", b =>
-                {
-                    b.HasOne("Models.Card", null)
-                        .WithMany()
-                        .HasForeignKey("CardsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersAssignedID")
+                        .HasForeignKey("TagID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -230,8 +198,7 @@ namespace Repo.Migrations
                     b.HasOne("Models.Section", "Section")
                         .WithMany("Cards")
                         .HasForeignKey("SectionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Section");
                 });
@@ -239,10 +206,46 @@ namespace Repo.Migrations
             modelBuilder.Entity("Models.Section", b =>
                 {
                     b.HasOne("Models.Board", "Board")
-                        .WithMany()
-                        .HasForeignKey("BoardID");
+                        .WithMany("Sections")
+                        .HasForeignKey("BoardID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Board");
+                });
+
+            modelBuilder.Entity("UserBoard", b =>
+                {
+                    b.HasOne("Models.Board", null)
+                        .WithMany()
+                        .HasForeignKey("BoardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UserCard", b =>
+                {
+                    b.HasOne("Models.Card", null)
+                        .WithMany()
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Board", b =>
+                {
+                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("Models.Section", b =>

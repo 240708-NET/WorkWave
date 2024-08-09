@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Repository
@@ -16,10 +17,12 @@ namespace Repository
         }
 
         public List<Section> List(){
-                return context.Sections.ToList();
+                return context.Sections.Include(section => section.Board)
+                                        .Include(section => section.Cards).ToList();
         }
 
         public Section Save(Section section){
+                section.Board = context.Boards.Find(section.Board.ID);
                 context.Add(section);
                 context.SaveChanges();
             return section;

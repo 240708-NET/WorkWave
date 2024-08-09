@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Repository
@@ -16,7 +17,7 @@ namespace Repository
         }
 
         public List<User> List(){
-                return context.Users.ToList();
+                return context.Users.Include(user => user.Boards).ToList();
         }
 
         public User Save(User user){
@@ -42,6 +43,10 @@ namespace Repository
 
         public User GetById(int id){
                 return context.Users.Find(id);
+        }
+
+        public User GetByEmail(string email){
+            return null;
         }
     }
 
